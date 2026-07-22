@@ -1,5 +1,14 @@
+import Form from "./components/Form";
+import MovieDisplay from "./components/MovieDisplay";
+
 export default function App() {
-  // For now, we are keeping the component simple
-  // so we can confirm that React is working correctly.
-  return <div>Hello World!</div>;
+  // Form and movie display share information
+  return (
+    <main>
+      <h1>Movie Search</h1>
+
+      <Form />
+      <MovieDisplay />
+    </main>
+  );
 }

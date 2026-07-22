@@ -1,46 +1,47 @@
 import { useState } from "react";
 
-export default function Form() {
-    // Search box
-    const [formData, setFormData] = useState({
-        searchterm: "",
+export default function Form({ moviesearch }) {
+  // Search box
+  const [formData, setFormData] = useState({
+    searchterm: "",
+  });
+
+  // Function for the search box
+  const handleChange = (event) => {
+    // We copy the current form data and update the input that changed.
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
     });
+  };
 
-    // Function for the search box
-    const handleChange = (event) => {
+  // Function runs when the user clicks the Search button
+  const handleSubmit = (event) => {
+    
+    event.preventDefault();
 
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value,
-        });
-    };
+    // Checks the form sends the correct movie title
+    moviesearch(formData.searchterm);
+  };
 
-    // Function runs when the user clicks the Search button
-    const handleSubmit = (event) => {
-        event.preventDefault();
+  return (
+    <section>
+      <h2>Search for a Movie</h2>
 
-        // Checks the form sends the correct movie title
-        console.log("Movie searched:", formData.searchterm);
-    };
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="searchterm">Movie title:</label>
 
-    return (
-        <section>
-            <h2>Search for a Movie</h2>
+        <input
+          id="searchterm"
+          type="text"
+          name="searchterm"
+          placeholder="Enter a movie title"
+          value={formData.searchterm}
+          onChange={handleChange}
+        />
 
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="searchterm">Movie title:</label>
-
-                <input
-                    id="searchterm"
-                    type="text"
-                    name="searchterm"
-                    placeholder="Enter a movie title"
-                    value={formData.searchterm}
-                    onChange={handleChange}
-                />
-
-                <input type="submit" value="Search" />
-            </form>
-        </section>
-    );
+        <input type="submit" value="Search" />
+      </form>
+    </section>
+  );
 }

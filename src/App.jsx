@@ -2,6 +2,16 @@ import { useEffect, useState } from "react";
 import Form from "./components/Form";
 import MovieDisplay from "./components/MovieDisplay";
 
+// Movie titles where the page can randomly load
+const movieTitles = [
+  "Clueless",
+  "Batman",
+  "The Matrix",
+  "Titanic",
+  "Terminator",
+  "Shrek",
+];
+
 export default function App() {
   // Coded OMDb API key from .env file
   const apiKey = import.meta.env.VITE_OMDB_API_KEY;
@@ -32,8 +42,15 @@ export default function App() {
 
   // Starting movie information to display
   useEffect(() => {
-    getMovie("Clueless");
-  }, []);
+  // Math.random will select a random position from the movieTitles array to be loaded into the page
+  const randomIndex = Math.floor(Math.random() * movieTitles.length);
+
+  // Get the movie title stored at the random array position
+  const randomMovie = movieTitles[randomIndex];
+
+  // Search for the randomly selected movie
+  getMovie(randomMovie);
+}, []);
 
   return (
     <main>

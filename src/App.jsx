@@ -11,6 +11,8 @@ export default function App() {
 
   // Async functions to search for the movie name
   const getMovie = async (searchTerm) => {
+
+    try {
     // Search and locate movie by using API key
     const response = await fetch(
       `https://www.omdbapi.com/?apikey=${apiKey}&t=${searchTerm}`,
@@ -21,7 +23,12 @@ export default function App() {
 
     // Save the movie information
     setMovie(data);
-  };
+
+  } catch (error) {
+    // Show the error in the console if the request does not work.
+    console.error(error);
+  }
+};
 
   // Starting movie information to display
   useEffect(() => {

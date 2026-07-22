@@ -1,5 +1,20 @@
+import { useState } from "react";
+
 export default function Form() {
-  // Displays the input and the button
+  // Search box
+  const [formData, setFormData] = useState({
+    searchterm: "",
+  });
+
+  // Function for the search box
+  const handleChange = (event) => {
+ 
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   return (
     <section>
       <h2>Search for a Movie</h2>
@@ -12,6 +27,8 @@ export default function Form() {
           type="text"
           name="searchterm"
           placeholder="Enter a movie title"
+          value={formData.searchterm}
+          onChange={handleChange}
         />
 
         <input type="submit" value="Search" />
